@@ -23,6 +23,19 @@ const initialMatchData: MatchType = {
 
 function App() {
   const [match, setMatch] = useState<MatchType>(initialMatchData);
+  const [isShowMenu, setIsShowMenu] = useState(false);
+
+    const handleNewGame = () => {
+    setMatch(initialMatchData);
+        setIsShowMenu(false);
+  };
+
+  const showMenu = () => {
+    setIsShowMenu(true);
+  };
+  const hideMenu = () => {
+    setIsShowMenu(false);
+  };
 
   const {
     blueScore,
@@ -178,9 +191,20 @@ function App() {
           </div>
         </div>
         <div className="nav">
-          <button className="undo"></button>
-          <button className="menu"></button>
+          <button className="undoButton"></button>
+          <button className="menuButton" onClick={showMenu}></button>
         </div>
+
+        {isShowMenu && (
+          <div className="menu">
+            <div className="menuList">
+              <button className="newGame" onClick={handleNewGame}>New Game</button>
+            </div>
+            <div>
+              <button className="closeMenu" onClick={hideMenu}></button>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
