@@ -1,0 +1,149 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.body {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.74);
+}
+
+.bigCon {
+  height: 500px;
+  width: 350px;
+  display: flex;
+  flex-direction: column;
+}
+
+.scoreboard {
+  background-color: rgba(255, 255, 255, 0.671);
+  height: 500px;
+  width: 95%;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  border-radius: 15px 15px 0px 0px;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+}
+
+.teamRed {
+  height: 45%;
+  background-color: #ce3e3e;
+  transform: rotate(180deg);
+  display: flex;
+}
+
+.midCon {
+  height: 10%;
+  background-color: rgb(50, 50, 50);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 35px;
+  font-weight: bold;
+  color: white;
+  border-radius: 10px;
+}
+
+.fault {
+  height: 100%;
+  width: 30%;
+  background-color: grey;
+  font-size: 20px;
+  color: white;
+}
+
+.midCon p {
+  height: 100%;
+  width: 30%;
+  display: flex;
+  justify-content: center;
+}
+
+.score {
+  height: 100%;
+  width: 30%;
+  background-color: grey;
+  font-size: 20px;
+  color: white;
+}
+
+.teamBlue {
+  height: 45%;
+  background-color: #543ecd;
+  display: flex;
+}
+
+.boxes {
+  height: 100%;
+  width: 50%;
+  background-color: transparent;
+  font-size: 30px;
+  border: 2px solid white;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.boxes:hover {
+  opacity: 0.7;
+  filter: brightness(1.5);
+  cursor: pointer;
+}
+
+.greenBorder {
+  box-shadow: inset 0 0 0px 8px rgb(24, 241, 40);
+}
+
+.nav {
+  height: 50px;
+  width: 95%;
+  background-color: grey;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  border-radius: 0px 0px 15px 15px;
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.undo {
+  margin-left: 5px;
+  height: 30px;
+  width: 30px;
+  background: url(assets/undo.svg) no-repeat center;
+  background-size: contain;
+  border: none;
+}
+.menu {
+  margin-right: 5px;
+  height: 30px;
+  width: 30px;
+  background: url(assets/menu.svg) no-repeat center;
+  background-size: contain;
+  border: 2px solid transparent;
+}
+
+.undo:hover,
+.menu:hover {
+  opacity: 0.7;
+  cursor: pointer;
+}
+
+.blue-rotate {
+  transform: rotate(0deg);
+}
+
+.red-rotate {
+  transform: rotate(180deg); /* Rotates when Red is serving */
+}
+
+.green-border {
+  border: 3px solid green;
+  border-radius: 5px;
+}
