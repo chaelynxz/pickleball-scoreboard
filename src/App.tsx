@@ -175,6 +175,18 @@ function App() {
     setMatch(initialMatchData);
   }
 
+  const handleUndo = () => {
+    if (matches.length === 1) {
+      return;
+    }
+    const undoMatches = matches.slice(0, -1);
+
+    const previousMatch = undoMatches[undoMatches.length - 1];
+
+    setMatches(undoMatches);
+    setMatch(previousMatch);
+  };
+
   return (
     <div className="body">
       <Modal
@@ -256,7 +268,7 @@ function App() {
           </div>
         </div>
         <div className="nav">
-          <button className="undoButton"></button>
+          <button className="undoButton" onClick={handleUndo}></button>
           <button className="menuButton" onClick={showMenu}></button>
         </div>
 
