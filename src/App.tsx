@@ -1,6 +1,17 @@
 import { useEffect, useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
+import Modal from "react-modal";
+
+const customStyles = {
+  content: {
+    top: "50%",
+    left: "50%",
+    right: "auto",
+    bottom: "auto",
+    marginRight: "-50%",
+    transform: "translate(-50%, -50%)",
+  },
+};
+
 import "./App.css";
 
 type MatchType = {
@@ -21,19 +32,24 @@ const initialMatchData: MatchType = {
   server: 2,
 };
 
+// Modal.setAppElement("body");
+
 function App() {
   const [match, setMatch] = useState<MatchType>(initialMatchData);
   const [isShowMenu, setIsShowMenu] = useState(false);
+  const [modalIsOpen, setIsOpen] = useState(false);
+  const [winner, setWinner] = useState<null | "TeamBlue" | "TeamRed">(null);
 
-    const handleNewGame = () => {
+  const handleNewGame = () => {
     setMatch(initialMatchData);
-        setIsShowMenu(false);
+    setIsShowMenu(false);
   };
 
   const showMenu = () => {
     setIsShowMenu(true);
   };
   const hideMenu = () => {
+    setMatch(initialMatchData);
     setIsShowMenu(false);
   };
 
@@ -63,10 +79,15 @@ function App() {
     const winRed = redScore - blueScore;
     if (blueScore >= 11 && winBlue >= 2) {
       console.log("Blue Wins");
+      openModal();
+      setWinner("TeamBlue");
+
       return;
     }
     if (redScore >= 11 && winRed >= 2) {
       console.log("Red Wins");
+      setWinner("TeamRed");
+      openModal();
       return;
     }
 
@@ -130,8 +151,33 @@ function App() {
     }
   };
 
+  function openModal() {
+    setIsOpen(true);
+  }
+
+  function afterOpenModal() {
+    // references are now sync'd and can be accessed.
+    //subtitle?.style?.color = "#f00";
+  }
+
+  function closeModal() {
+    setIsOpen(false);
+    setMatch(initialMatchData);
+  }
+
   return (
     <div className="body">
+      <Modal
+        isOpen={modalIsOpen}
+        onAfterOpen={afterOpenModal}
+        onRequestClose={closeModal}
+        style={customStyles}
+        contentLabel="Example Modal"
+      >
+        <h1 style={{ color: winner === "TeamBlue" ? "#543ecd" : "#ce3e3e" }}>
+          {winner === "TeamBlue" ? "Blue Wins" : "Red Teams"}
+        </h1>
+      </Modal>
       <div className="bigCon">
         <div className="scoreboard">
           <div className="teamRed">
@@ -198,7 +244,9 @@ function App() {
         {isShowMenu && (
           <div className="menu">
             <div className="menuList">
-              <button className="newGame" onClick={handleNewGame}>New Game</button>
+              <button className="newGame" onClick={handleNewGame}>
+                New Game
+              </button>
             </div>
             <div>
               <button className="closeMenu" onClick={hideMenu}></button>

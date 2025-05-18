@@ -13,21 +13,20 @@
 }
 
 .bigCon {
-  height: 500px;
-  width: 320px;
+  height: 100%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   position: relative;
-  
 }
 
 .scoreboard {
   background-color: rgba(255, 255, 255, 0.671);
-  height: 500px;
-  width: 300px;
+  height: 100%;
+  width: 100%;
   display: flex;
   flex-direction: column;
-  padding: 10px;
+
   border-radius: 15px 15px 0px 0px;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
 }
@@ -64,6 +63,7 @@
   width: 30%;
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
 .score {
@@ -104,12 +104,12 @@
 
 .nav {
   height: 50px;
-  width: 300px;
+  width: 100%;
   background-color: grey;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px;
+
   border-radius: 0px 0px 15px 15px;
   box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3);
 }
@@ -132,9 +132,9 @@
 }
 
 .menu {
-   position: absolute;
-   right: 0;
-   bottom: 0;
+  position: absolute;
+  right: 0;
+  bottom: 0;
   height: 200px;
   width: 150px;
   border-radius: 0px 0px 15px 0px;
@@ -147,13 +147,11 @@
   /* background-color: rgb(161, 161, 161); */
   display: flex;
   flex-direction: column;
-
 }
 .newGame {
   height: 40px;
   width: 100%;
   font-size: 20px;
-
 }
 .closeMenu {
   position: absolute;
