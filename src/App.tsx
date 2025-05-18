@@ -202,12 +202,20 @@ function App() {
               RR
             </div>
           </div>
-          <div className="midCon">
+          <div
+            className="midCon"
+            style={{
+              transform:
+                currentServingTeam === "TeamRed"
+                  ? "rotate(180deg)"
+                  : "rotate(0deg)",
+            }}
+          >
             <button className="fault" onClick={onFault}>
               Fault
             </button>
             <p>
-              {blueScore}-{redScore}-{server}
+              {currentServingTeam === "TeamBlue" ? blueScore :redScore}-{currentServingTeam === "TeamRed" ? blueScore : redScore}-{server}
             </p>
             <button className="score" onClick={addScore}>
               +1
