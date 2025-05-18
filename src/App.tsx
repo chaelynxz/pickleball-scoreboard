@@ -44,6 +44,7 @@ function App() {
   const handleNewGame = () => {
     setMatch(initialMatchData);
     setIsShowMenu(false);
+    setMatches([initialMatchData]);
   };
 
   const showMenu = () => {
@@ -173,6 +174,7 @@ function App() {
   function closeModal() {
     setIsOpen(false);
     setMatch(initialMatchData);
+    setMatches([initialMatchData]);
   }
 
   const handleUndo = () => {
