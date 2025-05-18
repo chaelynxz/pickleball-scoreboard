@@ -39,6 +39,7 @@ function App() {
   const [isShowMenu, setIsShowMenu] = useState(false);
   const [modalIsOpen, setIsOpen] = useState(false);
   const [winner, setWinner] = useState<null | "TeamBlue" | "TeamRed">(null);
+  const [matches, setMatches] = useState<MatchType[]>([]);
 
   const handleNewGame = () => {
     setMatch(initialMatchData);
@@ -70,9 +71,9 @@ function App() {
   // const [courtSide, setCourtSide] = useState<"left" | "right">("right");
   // const [server, setServer] = useState<1 | 2>(2);
 
-  // useEffect(() => {
-  //   //first load
-  // }, []);
+  useEffect(() => {
+    setMatches([...matches, initialMatchData]);
+  }, []);
 
   useEffect(() => {
     const winBlue = blueScore - redScore;
@@ -90,63 +91,72 @@ function App() {
       openModal();
       return;
     }
-
-    // if (blueScore === 11) {
-    //   console.log("Blue Wins");
-    //   return;
-    // }
-    // if (redScore === 11) {
-    //   console.log("Red Wins");
-    //   return;
-    // }
   }, [redScore, blueScore]);
 
+  useEffect(() => {
+    console.log({ matches });
+  }, [matches]);
+
   const addScore = () => {
+    let newMatch;
     if (currentServingTeam === "TeamBlue") {
-      setMatch({
+      newMatch = {
         ...match,
         blueScore: blueScore + 1,
         courtSide: courtSide === "right" ? "left" : "right",
-      });
+      };
     } else {
-      setMatch({
+      newMatch = {
         ...match,
         redScore: redScore + 1,
         courtSide: courtSide === "right" ? "left" : "right",
-      });
+      };
     }
+
+    setMatch(newMatch as MatchType);
+    setMatches([...matches, newMatch as MatchType]);
   };
 
   const onFault = () => {
+    let newMatch;
+
     if (isInitialServe) {
-      setMatch({
+      newMatch = {
         ...match,
         server: 1,
         currentServingTeam: "TeamRed",
         isInitialServe: false,
-      });
+        courtSide: "right",
+      };
+      setMatch(newMatch as MatchType);
+      setMatches([...matches, newMatch as MatchType]);
+      console.log("init");
       return;
     }
 
     if (server === 1) {
-      setMatch({
+      newMatch = {
         ...match,
         server: 2,
         courtSide: courtSide === "right" ? "left" : "right",
-      });
-
+      };
+      setMatch(newMatch as MatchType);
+      setMatches([...matches, newMatch as MatchType]);
+      console.log("server 1");
       return;
     }
 
     if (server === 2) {
-      setMatch({
+      newMatch = {
         ...match,
         currentServingTeam:
           currentServingTeam === "TeamBlue" ? "TeamRed" : "TeamBlue",
         server: 1,
         courtSide: "right",
-      });
-
+      };
+      setMatch(newMatch as MatchType);
+      setMatches([...matches, newMatch as MatchType]);
+      console.log("server 2");
       return;
     }
   };
@@ -175,7 +185,7 @@ function App() {
         contentLabel="Example Modal"
       >
         <h1 style={{ color: winner === "TeamBlue" ? "#543ecd" : "#ce3e3e" }}>
-          {winner === "TeamBlue" ? "Blue Wins" : "Red Teams"}
+          {winner === "TeamBlue" ? "Blue Wins" : "Red Wins"}
         </h1>
       </Modal>
       <div className="bigCon">
@@ -215,7 +225,8 @@ function App() {
               Fault
             </button>
             <p>
-              {currentServingTeam === "TeamBlue" ? blueScore :redScore}-{currentServingTeam === "TeamRed" ? blueScore : redScore}-{server}
+              {currentServingTeam === "TeamBlue" ? blueScore : redScore}-
+              {currentServingTeam === "TeamRed" ? blueScore : redScore}-{server}
             </p>
             <button className="score" onClick={addScore}>
               +1
