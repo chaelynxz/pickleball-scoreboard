@@ -143,7 +143,6 @@ const ScoreBoard = ({
           {winner === "TeamBlue" ? "Blue Wins" : "Red Wins"}
         </h1>
       </Modal>
-      ;
       <div className="teamRed">
         <div
           className={`boxes ${
