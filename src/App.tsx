@@ -15,6 +15,7 @@ const customStyles = {
 import "./App.css";
 import type { MatchType } from "./types/MatchesType";
 import BottomNav from "./components/BottomNav";
+import ScoreBoard from "./components/ScoreBoard";
 
 const initialMatchData: MatchType = {
   blueScore: 0,
@@ -179,72 +180,7 @@ function App() {
         </h1>
       </Modal>
       <div className="bigCon">
-        <div className="scoreboard">
-          <div className="teamRed">
-            <div
-              className={`boxes ${
-                currentServingTeam === "TeamRed" && courtSide === "left"
-                  ? "greenBorder"
-                  : ""
-              }`}
-              id="red2"
-            >
-              RL
-            </div>
-            <div
-              className={`boxes ${
-                currentServingTeam === "TeamRed" && courtSide === "right"
-                  ? "greenBorder"
-                  : ""
-              }`}
-              id="red1"
-            >
-              RR
-            </div>
-          </div>
-          <div
-            className="midCon"
-            style={{
-              transform:
-                currentServingTeam === "TeamRed"
-                  ? "rotate(180deg)"
-                  : "rotate(0deg)",
-            }}
-          >
-            <button className="fault" onClick={onFault}>
-              Fault
-            </button>
-            <p>
-              {currentServingTeam === "TeamBlue" ? blueScore : redScore}-
-              {currentServingTeam === "TeamRed" ? blueScore : redScore}-{server}
-            </p>
-            <button className="score" onClick={addScore}>
-              +1
-            </button>
-          </div>
-          <div className="teamBlue">
-            <div
-              className={`boxes ${
-                currentServingTeam === "TeamBlue" && courtSide === "left"
-                  ? "greenBorder"
-                  : ""
-              }`}
-              id="blue2"
-            >
-              BL
-            </div>
-            <div
-              className={`boxes ${
-                currentServingTeam === "TeamBlue" && courtSide === "right"
-                  ? "greenBorder"
-                  : ""
-              }`}
-              id="blue1"
-            >
-              BR
-            </div>
-          </div>
-        </div>
+        <ScoreBoard match ={match} onFault={onFault} addScore={addScore}/>
         <BottomNav
           matches={matches}
           handleNewGame={handleNewGame}
