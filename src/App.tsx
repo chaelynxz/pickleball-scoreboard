@@ -16,20 +16,18 @@ function App() {
   }, []);
 
   return (
-    <div className="body">
-      <div className="bigCon">
-        <ScoreBoard
-          match={match}
-          onSetMatch={setMatch}
-          matches={matches}
-          onSetMatches={setMatches}
-        />
-        <BottomNav
-          onSetMatch={setMatch}
-          matches={matches}
-          onSetMatches={setMatches}
-        />
-      </div>
+    <div className="bigCon">
+      <ScoreBoard
+        match={match}
+        onSetMatch={setMatch}
+        matches={matches}
+        onSetMatches={setMatches}
+      />
+      <BottomNav
+        onSetMatch={setMatch}
+        matches={matches}
+        onSetMatches={setMatches}
+      />
     </div>
   );
 }
