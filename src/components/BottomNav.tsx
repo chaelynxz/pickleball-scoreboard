@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { MatchType } from "../types/MatchesType";
 import { initialMatchData } from "../constant/initialServeData";
 
@@ -18,6 +18,10 @@ const BottomNav = ({ matches, onSetMatches, onSetMatch }: BottomNavProps) => {
     setIsShowMenu(false);
     setShowHistory(false);
   };
+
+  useEffect(() => {
+    console.log({ matches });
+  }, [matches]);
 
   const handleUndo = () => {
     if (matches.length === 1) {
@@ -50,7 +54,12 @@ const BottomNav = ({ matches, onSetMatches, onSetMatch }: BottomNavProps) => {
               New Game
             </button>
 
-            <button className="scoreHistoryButton">Score History</button>
+            <button
+              className="scoreHistoryButton"
+              onClick={() => setShowHistory(true)}
+            >
+              Score History
+            </button>
           </div>
           <div>
             <button className="closeMenu" onClick={hideMenu}></button>
@@ -89,23 +98,55 @@ const BottomNav = ({ matches, onSetMatches, onSetMatch }: BottomNavProps) => {
               color: "#333",
             }}
           >
-            Match History
+            Score History
           </h2>
+
           <ul style={{ listStyle: "none", padding: 0 }}>
-            {[...matches].reverse().map((match, index) => {
+            {matches
+              .filter((match) => !match.atFault)
+              .slice(1)
+              .reverse()
+              .map((match, index) => {
+                let scoringAnnouncement = `${
+                  matches.filter((match) => !match.atFault).length - (index + 1)
+                }.${match.currentServingTeam === "TeamRed" ? "🔴" : "🔵"}  ${
+                  match.server
+                } secured the point!`;
+
+                return scoringAnnouncement ? (
+                  <li
+                    key={index}
+                    style={{
+                      background:
+                        match.currentServingTeam === "TeamBlue"
+                          ? "#e1f5fe"
+                          : "#ffebee",
+                      padding: "10px",
+                      marginBottom: "5px",
+                      borderRadius: "6px",
+                      textAlign: "center",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    {scoringAnnouncement}
+                  </li>
+                ) : null;
+              })}
+            {/* {[...matches].reverse().map((match, index) => {
               const prevMatch = matches[matches.length - (index + 2)];
               let scoringAnnouncement = "";
               console.log({ index });
-              if (prevMatch) {
-                if (match.blueScore > prevMatch.blueScore) {
-                  scoringAnnouncement = `${matches.length - index}.🔵 Blue ${
-                    match.server
-                  } secured the point!`;
-                } else if (match.redScore > prevMatch.redScore) {
-                  scoringAnnouncement = `${matches.length - index}.🔴 Red ${
-                    match.server
-                  } secured the point!`;
-                }
+
+              if (!prevMatch) return;
+
+              if (match.blueScore > prevMatch.blueScore) {
+                scoringAnnouncement = `${matches.length - index - 1}.🔵 Blue ${
+                  match.server
+                } secured the point!`;
+              } else if (match.redScore > prevMatch.redScore) {
+                scoringAnnouncement = `${matches.length - index - 1}.🔴 Red ${
+                  match.server
+                } secured the point!`;
               }
 
               return scoringAnnouncement ? (
@@ -126,7 +167,7 @@ const BottomNav = ({ matches, onSetMatches, onSetMatch }: BottomNavProps) => {
                   {scoringAnnouncement}
                 </li>
               ) : null;
-            })}
+            })} */}
           </ul>
         </div>
       )}

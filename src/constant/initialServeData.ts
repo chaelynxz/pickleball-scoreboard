@@ -7,4 +7,5 @@ export const initialMatchData: MatchType = {
   currentServingTeam: "TeamBlue",
   courtSide: "right",
   server: 2,
+  atFault: false,
 };

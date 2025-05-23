@@ -74,12 +74,14 @@ const ScoreBoard = ({
         ...match,
         blueScore: blueScore + 1,
         courtSide: courtSide === "right" ? "left" : "right",
+        atFault: false,
       };
     } else {
       newMatch = {
         ...match,
         redScore: redScore + 1,
         courtSide: courtSide === "right" ? "left" : "right",
+        atFault: false,
       };
     }
 
@@ -96,6 +98,7 @@ const ScoreBoard = ({
         currentServingTeam: "TeamRed",
         isInitialServe: false,
         courtSide: "right",
+        atFault: true,
       };
 
       return newMatch as MatchType;
@@ -106,6 +109,7 @@ const ScoreBoard = ({
         ...match,
         server: 2,
         courtSide: courtSide === "right" ? "left" : "right",
+        atFault: true,
       };
 
       return newMatch as MatchType;
@@ -118,6 +122,7 @@ const ScoreBoard = ({
           currentServingTeam === "TeamBlue" ? "TeamRed" : "TeamBlue",
         server: 1,
         courtSide: "right",
+        atFault: true,
       };
 
       return newMatch as MatchType;

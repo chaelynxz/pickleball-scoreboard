@@ -5,4 +5,5 @@ export type MatchType = {
   currentServingTeam: "TeamBlue" | "TeamRed";
   courtSide: "left" | "right";
   server: 1 | 2;
+  atFault: boolean;
 };
