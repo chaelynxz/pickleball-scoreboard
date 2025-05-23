@@ -4,17 +4,7 @@ import "./App.css";
 import type { MatchType } from "./types/MatchesType";
 import BottomNav from "./components/BottomNav";
 import ScoreBoard from "./components/ScoreBoard";
-
-const initialMatchData: MatchType = {
-  blueScore: 0,
-  redScore: 0,
-  isInitialServe: true,
-  currentServingTeam: "TeamBlue",
-  courtSide: "right",
-  server: 2,
-};
-
-// Modal.setAppElement("body");
+import { initialMatchData } from "./constant/initialServeData";
 
 function App() {
   const [match, setMatch] = useState<MatchType>(initialMatchData);
