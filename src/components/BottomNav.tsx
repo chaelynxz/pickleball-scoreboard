@@ -1,13 +1,20 @@
 import { useState } from "react";
 import type { MatchType } from "../types/MatchesType";
+import { initialMatchData } from "../constant/initialServeData";
 
 type BottomNavProps = {
-  handleUndo: () => void;
-  handleNewGame: () => void;
   matches: MatchType[];
+  match: MatchType;
+  onSetMatch: (match: MatchType) => void;
+  onSetMatches: (matches: MatchType[]) => void;
 };
 
-const BottomNav = ({ handleUndo, handleNewGame, matches }: BottomNavProps) => {
+const BottomNav = ({
+  matches,
+  onSetMatches,
+  onSetMatch,
+  match,
+}: BottomNavProps) => {
   const [isShowMenu, setIsShowMenu] = useState(false);
   const [showHistory, setShowHistory] = useState(false);
   const showMenu = () => {
@@ -16,6 +23,18 @@ const BottomNav = ({ handleUndo, handleNewGame, matches }: BottomNavProps) => {
   const hideMenu = () => {
     setIsShowMenu(false);
     setShowHistory(false);
+  };
+
+  const handleUndo = () => {
+    if (matches.length === 1) {
+      return;
+    }
+    const undoMatches = matches.slice(0, -1);
+
+    const previousMatch = undoMatches[undoMatches.length - 1];
+
+    onSetMatches(undoMatches);
+    onSetMatch(previousMatch);
   };
 
   return (
@@ -29,7 +48,8 @@ const BottomNav = ({ handleUndo, handleNewGame, matches }: BottomNavProps) => {
             <button
               className="newGame"
               onClick={() => {
-                handleNewGame();
+                onSetMatch(initialMatchData);
+                onSetMatches([initialMatchData]);
                 setIsShowMenu(false);
               }}
             >
