@@ -4,17 +4,11 @@ import { initialMatchData } from "../constant/initialServeData";
 
 type BottomNavProps = {
   matches: MatchType[];
-  match: MatchType;
   onSetMatch: (match: MatchType) => void;
   onSetMatches: (matches: MatchType[]) => void;
 };
 
-const BottomNav = ({
-  matches,
-  onSetMatches,
-  onSetMatch,
-  match,
-}: BottomNavProps) => {
+const BottomNav = ({ matches, onSetMatches, onSetMatch }: BottomNavProps) => {
   const [isShowMenu, setIsShowMenu] = useState(false);
   const [showHistory, setShowHistory] = useState(false);
   const showMenu = () => {

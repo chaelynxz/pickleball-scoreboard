@@ -25,7 +25,6 @@ function App() {
           onSetMatches={setMatches}
         />
         <BottomNav
-          match={match}
           onSetMatch={setMatch}
           matches={matches}
           onSetMatches={setMatches}
