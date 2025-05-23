@@ -153,8 +153,25 @@
   width: 100%;
   font-size: 20px;
 }
-.closeMenu {
+
+.scoreHistoryButton {
+   height: 40px;
+  width: 100%;
+  font-size: 20px;
+}
+
+.scoreHistory {
   position: absolute;
+  right: 0;
+  bottom: 0;
+  height: 500px;
+  width: 250px;
+  border-radius: 0px 0px 15px 0px;
+  background-color: rgb(255, 255, 255);
+}
+
+.closeMenu {
+  position: fixed;
   right: 0;
   bottom: 0;
   margin-right: 10px;
