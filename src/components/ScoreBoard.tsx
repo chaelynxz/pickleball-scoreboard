@@ -87,9 +87,8 @@ const ScoreBoard = ({
     onSetMatches([...matches, newMatch as MatchType]);
   };
 
-  const onFault = () => {
+  const getMatchData = () => {
     let newMatch;
-
     if (isInitialServe) {
       newMatch = {
         ...match,
@@ -98,10 +97,8 @@ const ScoreBoard = ({
         isInitialServe: false,
         courtSide: "right",
       };
-      onSetMatch(newMatch as MatchType);
-      onSetMatches([...matches, newMatch as MatchType]);
-      console.log("init");
-      return;
+
+      return newMatch as MatchType;
     }
 
     if (server === 1) {
@@ -110,10 +107,8 @@ const ScoreBoard = ({
         server: 2,
         courtSide: courtSide === "right" ? "left" : "right",
       };
-      onSetMatch(newMatch as MatchType);
-      onSetMatches([...matches, newMatch as MatchType]);
-      console.log("server 1");
-      return;
+
+      return newMatch as MatchType;
     }
 
     if (server === 2) {
@@ -124,11 +119,15 @@ const ScoreBoard = ({
         server: 1,
         courtSide: "right",
       };
-      onSetMatch(newMatch as MatchType);
-      onSetMatches([...matches, newMatch as MatchType]);
-      console.log("server 2");
-      return;
+
+      return newMatch as MatchType;
     }
+  };
+
+  const onFault = () => {
+    const newMatch = getMatchData();
+    onSetMatch(newMatch as MatchType);
+    onSetMatches([...matches, newMatch as MatchType]);
   };
 
   return (
